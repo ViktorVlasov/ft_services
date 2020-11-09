@@ -5,10 +5,10 @@ RUN apk update && apk upgrade && \
 	apk add openssl vsftpd && \
 	echo 'root:root' | chpasswd
 
-COPY ftps.crt			/etc/ssl/private/
-COPY ftps.key			/etc/ssl/private/
-COPY vsftpd.conf		/etc/vsftpd/vsftp_ftps.conf
-COPY ./start_ftps.sh	/tmp/
+COPY srcs/ftps.crt			/etc/ssl/private/
+COPY srcs/ftps.key			/etc/ssl/private/
+COPY srcs/vsftpd.conf		/etc/vsftpd/vsftp_ftps.conf
+COPY srcs/start_ftps.sh		/tmp/
 
 RUN chmod +x /tmp/start_ftps.sh
 

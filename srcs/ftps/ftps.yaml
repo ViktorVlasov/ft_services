@@ -12,10 +12,10 @@ spec:
     name: ftps
     targetPort: 21
     protocol: TCP
-  - port: 10100
+  - port: 20100
     name: port-passv
     protocol: TCP
-    targetPort: 10100
+    targetPort: 20100
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -38,4 +38,4 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 21
-        - containerPort: 10100 
+        - containerPort: 20100 
