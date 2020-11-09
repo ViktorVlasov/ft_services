@@ -1,23 +1,22 @@
 FROM alpine
 
-RUN apk update
-RUN apk add sudo \
-            nginx \
-            openssh openssl \
-            supervisor
+RUN apk update && \
+    apk add nginx openssh supervisor && \
+    mkdir run/nginx && touch run/nginx/nginx.pid && \
+    echo "root:root" | chpasswd
 
-#copy file
+COPY srcs/serv.conf              /etc/nginx/conf.d/default.conf
+COPY srcs/supervisord.conf       /etc/supervisord.conf
+COPY srcs/nginx-selfsigned.crt   /etc/ssl/certs/
+COPY srcs/nginx-selfsigned.key   /etc/ssl/certs/
+COPY srcs/start_serv.sh          /tmp/
 
-COPY ./serv.conf /etc/nginx/conf.d/default.conf
+COPY srcs/ssh_host_rsa_key.pub /etc/ssh/
+COPY srcs/ssh_host_rsa_key /etc/ssh/
+RUN chmod 400 /etc/ssh/ssh_host_rsa_key
+COPY srcs/sshd_config /etc/ssh/
 
-#ssl
-RUN openssl req -newkey rsa:2048 -nodes -keyout /etc/ssl/certs/localhost.key \
-		-x509 -days 90 -subj "/C=RU/ST=Moscow/L=Moscow/O=21school/OU=21/CN=efumiko" \
-		-out /etc/ssl/certs/localhost.crt
-
-
-COPY ./start_serv.sh /tmp/
 RUN chmod +x /tmp/start_serv.sh
-RUN mkdir -p /run/nginx
-EXPOSE 80 443
+
+EXPOSE 80 443 22
 CMD ["/tmp/start_serv.sh"]
