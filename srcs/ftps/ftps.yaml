@@ -4,7 +4,7 @@ metadata:
   name: ftps-svc
 spec:
   type: LoadBalancer
-  loadBalancerIP: 192.168.99.154
+  loadBalancerIP: 192.168.99.153
   selector:
     app: ftps
   ports:
@@ -20,7 +20,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ftps
+  name: ftps-deployment
 spec:
   selector:
     matchLabels:
@@ -38,4 +38,4 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 21
-        - containerPort: 20100 
+        - containerPort: 20100

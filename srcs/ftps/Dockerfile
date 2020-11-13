@@ -13,5 +13,5 @@ COPY srcs/start_ftps.sh		/tmp/
 RUN chmod +x /tmp/start_ftps.sh
 
 EXPOSE 21
-CMD ["/tmp/start_serv.sh"]
+CMD ["/tmp/start_ftps.sh"]
 
