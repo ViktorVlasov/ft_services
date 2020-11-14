@@ -1,9 +1,14 @@
 FROM alpine
 
-RUN apk update && apk upgrade
-RUN	apk	add supervisor \
-			wget
+RUN apk add influxdb supervisor && \
+	apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache && \
+	mkdir -p /etc/telegraf
 
-WORKDIR /grafana/bin/
-EXPOSE 3000
-CMD sh /var/init.sh
+VOLUME ["/root/.influxdb"]
+
+COPY srcs/supervisord.conf /etc/
+COPY srcs/telegraf.conf /etc/telegraf/
+
+EXPOSE 8086
+
+CMD ["/usr/bin/supervisord"]
