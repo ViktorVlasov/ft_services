@@ -21,5 +21,6 @@ COPY srcs/start.sh /tmp/start.sh
 
 RUN chmod +x /tmp/start.sh && \
     chmod 755 /var/www/phpmyadmin/config.inc.php
+    
 EXPOSE 5000
 CMD sh /tmp/start.sh

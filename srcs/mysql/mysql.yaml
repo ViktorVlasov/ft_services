@@ -3,14 +3,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: mysql-pvc
 spec:
-  volumeName: mysql-pv
   storageClassName: mysql
-  volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 128Mi
+      storage: 1Gi
 ---
 apiVersion: apps/v1 
 kind: Deployment
@@ -30,11 +28,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        image: mysql_image
+      - image: mysql_image
         name: mysql
         imagePullPolicy: Never
         ports:

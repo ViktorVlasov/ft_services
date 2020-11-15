@@ -1,12 +1,15 @@
- #!/bin/sh
+#!/bin/sh
 
 openrc default
 /etc/init.d/mariadb setup
 
 rc-service mariadb start
-mysql -u root < /etc/create_db.sql
-#mysql wordpress -u root < /var/wordpress.sql
+mysql -u root < /var/create_db.sql
 
 rc-service mariadb stop
 
-/usr/bin/mysqld_safe
+/usr/bin/mysqld_safe --datadir='/var/lib/mysql'
+#sleep infinity &
+#wait
+
+#mysql wordpress -u root < /var/wordpress.sql

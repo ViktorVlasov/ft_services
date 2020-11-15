@@ -3,13 +3,13 @@ FROM alpine
 RUN apk update && apk upgrade
 RUN apk add mariadb mariadb-client openrc
 
-VOLUME ["/var/lib/mysql"]
-VOLUME ["/sys/fs/cgroup"]
+VOLUME /var/lib/mysql
 
-COPY srcs/my.cnf /etc/mysql
-COPY srcs/create_db.sql /etc/
-COPY srcs/start.sh /tmp/start.sh
+COPY srcs/create_db.sql /var/
+COPY srcs/start.sh      /var/start.sh
+COPY srcs/my.cnf        /etc/mysql/
 
-RUN chmod +x /tmp/start.sh
+RUN chmod 744	/etc/mysql/my.cnf
+
 EXPOSE 3306
-CMD sh /tmp/start.sh
+CMD sh /var/start.sh

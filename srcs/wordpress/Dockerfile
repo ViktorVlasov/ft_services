@@ -1,5 +1,4 @@
-  
-FROM alpine
+  FROM alpine
 
 RUN apk update && apk upgrade
 RUN apk add nginx \
@@ -17,8 +16,12 @@ RUN wget https://wordpress.org/latest.tar.gz && \
     rm -rf /var/www/latest.tar.gz /var/www/phpMyAdmin-5.0.2-all-languages.tar.gz && \
 	chmod 777 /var/www/*
 
-COPY nginx.conf		/etc/nginx/conf.d/
-COPY wp-config.php		/var/www/wordpress/
+COPY srcs/nginx.conf		/etc/nginx/conf.d/
+COPY srcs/wp-config.php		/var/www/wordpress/
+COPY srcs/start.sh			/var/
+COPY srcs/supervisord.conf	/etc/
+
+RUN chmod 755 /var/www/wordpress/wp-config.php
 
 EXPOSE 5050
-CMD sh /var/init.sh
+CMD sh /var/start.sh
