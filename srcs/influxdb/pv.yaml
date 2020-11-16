@@ -5,7 +5,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: influxdb-ps
+  storageClassName: influxdb
   capacity:
     storage: 1Gi
   accessModes:

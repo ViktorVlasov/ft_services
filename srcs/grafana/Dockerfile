@@ -14,9 +14,10 @@ RUN wget https://dl.grafana.com/oss/release/grafana-7.2.0.linux-amd64.tar.gz \
 	&& rm -f grafana-7.2.0.linux-amd64.tar.gz \
 	&& cp /grafana/conf/defaults.ini /etc/grafana.ini
 
-COPY srcs/supervisord.conf	/etc/
-COPY srcs/grafana.db		/grafana/data/
+#COPY srcs/supervisord.conf	/etc/
+#COPY srcs/start.sh /var/
+#COPY srcs/grafana.db		/grafana/data/
 
 WORKDIR /grafana/bin/
 EXPOSE 3000
-CMD ["/usr/bin/supervisord"]
+CMD ["./grafana-server"]

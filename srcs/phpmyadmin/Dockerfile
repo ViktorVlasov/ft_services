@@ -13,7 +13,7 @@ RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-a
     rm phpMyAdmin-5.0.2-all-languages.tar.gz && \
     mv phpMyAdmin-5.0.2-all-languages /var/www/phpmyadmin && \
     chmod -R 777 /var/www/
-
+ 
 COPY srcs/nginx.conf         /etc/nginx/conf.d/default.conf
 COPY srcs/supervisord.conf  /etc/supervisord.conf
 COPY srcs/config.inc.php    /var/www/phpmyadmin/
