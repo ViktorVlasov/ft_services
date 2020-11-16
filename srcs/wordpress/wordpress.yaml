@@ -31,6 +31,7 @@ spec:
   selector:
     app: wordpress
   type: LoadBalancer
+  loadBalancerIP: 192.168.99.101:5050
   ports:
   - port: 5050
     targetPort: 5050
