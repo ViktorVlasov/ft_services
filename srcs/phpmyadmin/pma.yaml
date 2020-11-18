@@ -1,38 +1,9 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: pma-deployment
-  labels:
-    app: pma
-spec:
-  selector:
-    matchLabels:
-      app: pma
-  strategy:
-    type: Recreate
-  template:
-    metadata:
-      labels:
-        app: pma
-    spec:
-      containers:
-      - image: pma_image
-        imagePullPolicy: Never
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        name: pma
-        ports:
-        - containerPort: 5000
-          name: pma
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: pma-svc
+  name: phpmyadmin
   labels:
-    app: pma
+    app: phpmyadmin
   annotations:
     metallb.universe.tf/allow-shared-ip: kubernetes
 spec:
@@ -44,4 +15,29 @@ spec:
       port: 5000
       targetPort: 5000
   selector:
-    app: pma
+    app: phpmyadmin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - image: pma_image
+        imagePullPolicy: Never
+        name: phpmyadmin
+        ports:
+        - containerPort: 5000
+          name: phpmyadmin

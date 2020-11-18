@@ -1,7 +1,7 @@
 #!/bin/bash
 
-kubectl delete deployments nginx-deployment
-kubectl delete service nginx-svc
+kubectl delete deployments nginx
+kubectl delete service nginx
 
 docker build -t nginx_image .
 kubectl apply -f nginx.yaml

@@ -15,7 +15,7 @@ COPY srcs/ssh_host_rsa_key /etc/ssh/
 RUN chmod 400 /etc/ssh/ssh_host_rsa_key
 COPY srcs/sshd_config /etc/ssh/
 
-COPY srcs/start_serv.sh          /tmp/
-RUN chmod +x /tmp/start_serv.sh
+COPY srcs/start.sh          /tmp/
+RUN chmod +x /tmp/start.sh
 EXPOSE 80 443 22
-CMD ["/tmp/start_serv.sh"]
+CMD ["/tmp/start.sh"]

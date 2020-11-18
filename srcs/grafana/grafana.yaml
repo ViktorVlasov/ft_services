@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: grafana-svc
+  name: grafana
   annotations:
     metallb.universe.tf/allow-shared-ip: kubernetes
 spec:
@@ -15,13 +15,11 @@ spec:
     name: http
     targetPort: 3000
     protocol: TCP
-
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: grafana-deployment
+  name: grafana
 spec:
   selector:
     matchLabels:
