@@ -8,9 +8,7 @@ RUN apk update && apk upgrade && \
 COPY srcs/ftps.crt			/etc/ssl/private/
 COPY srcs/ftps.key			/etc/ssl/private/
 COPY srcs/vsftpd.conf		/etc/vsftpd/vsftp_ftps.conf
-COPY srcs/start.sh			/tmp/
-
-RUN chmod +x /tmp/start.sh
+COPY srcs/start.sh			/var/
 
 EXPOSE 21
-CMD ["/tmp/start.sh"]
+CMD sh /var/start.sh
